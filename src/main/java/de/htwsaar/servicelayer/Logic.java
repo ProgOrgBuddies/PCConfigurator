@@ -27,7 +27,7 @@ public class Logic {
 
     public Connection connectToDatabase() {
         try (Connection connection = DatabaseManager.connect()) {
-            System.out.println("Listen werden initialisiert...");
+            System.out.println("Listen werden initialisiert..");
             return connection;
         } catch (SQLException e)  {
             System.err.println("Fehler bei der Datenbankverbindung: " + e.getMessage());
