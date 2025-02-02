@@ -30,16 +30,7 @@ public class ComponentService {
 
             System.out.println("ID: " + id + " Name: " + name);
         }    }
-    public void printAllCPUComponents() {
-        Result<Record> result = dsl.select().from("CPU").fetch();
 
-        for (Record record : result) {
-            Integer id = record.getValue(CPU.CPU_ID);
-            String name = record.getValue(CPU.NAME);
-
-            System.out.println("ID: " + id + " Name: " + name);
-        }
-    }
     public Map<Integer, CPU> returnCPUComponentMap() {
         Result<Record> result = dsl.select().from("CPU").fetch();
 
