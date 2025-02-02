@@ -1,0 +1,11 @@
+ID;Brand;Name;Price
+1;Corsair;Vengeance LPX 16GB;80
+2;G.Skill;Ripjaws V 16GB;75
+3;Kingston;HyperX Fury 16GB;70
+4;Crucial;Ballistix 16GB;65
+5;Corsair;Vengeance RGB Pro 16GB;90
+6;G.Skill;Trident Z RGB 16GB;100
+7;Kingston;HyperX Predator 16GB;85
+8;Crucial;Ballistix Max 16GB;95
+9;Corsair;Dominator Platinum RGB 16GB;120
+10;G.Skill;Ripjaws V 32GB;150

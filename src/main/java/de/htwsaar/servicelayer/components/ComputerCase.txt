@@ -1,0 +1,11 @@
+ID;Brand;Name;Price
+1;NZXT;H510;70
+2;Corsair;iCUE 4000X RGB;120
+3;Fractal Design;Meshify C;90
+4;Cooler Master;MasterBox NR600;80
+5;Phanteks;Eclipse P400A;100
+6;Lian Li;PC-O11 Dynamic;130
+7;NZXT;H710;170
+8;Corsair;Obsidian Series 500D;150
+9;Fractal Design;Define R6;140
+10;Cooler Master;HAF XB EVO;110
