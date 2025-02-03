@@ -36,30 +36,35 @@ public class Logic {
 
     }
     public void showMainMenu() {
-        int input = ui.showMainMenu();
-        switch (input) {
-            case 1:
-                showDatabaseMenu();
-                break;
-            case 2:
-                showPersonalListMenu();
-                break;
-            case 3:
-                return;
-            default:
-                ui.IllegalInput("Error");
+        while (true) {
+            int input = ui.showMainMenu();
+            switch (input) {
+                case 1 -> showDatabaseMenu();
+                case 2 -> showPersonalListMenu();
+                case 3 -> {
+                    ui.showMessage("Programm wird beendet.");
+                    return;
+                }
+                default -> ui.IllegalInput("Ungültige Eingabe");
+            }
         }
+
     }
     public void showDatabaseMenu() {
-        int input = ui.showDatabaseMenu();
-        switch (input) {
-            case 1 -> componentService.getAllGPUComponents();
-            case 2 -> componentService.getAllCPUComponents();
-            case 3 -> componentService.getAllRAMComponents();
-            case 4 -> componentService.getAllPowerUnitComponents();
-            case 5 -> componentService.getAllMainboardComponents();
-            case 6 -> componentService.getAllCaseComponents();
-            default -> ui.showMessage("Ungültige Auswahl! Bitte eine Zahl zwischen 0 und 5 eingeben.");
+        while (true) {
+            int input = ui.showDatabaseMenu();
+            switch (input) {
+                case 1 -> componentService.getAllGPUComponents();
+                case 2 -> componentService.getAllCPUComponents();
+                case 3 -> componentService.getAllRAMComponents();
+                case 4 -> componentService.getAllPowerUnitComponents();
+                case 5 -> componentService.getAllMainboardComponents();
+                case 6 -> componentService.getAllCaseComponents();
+                case 7 -> {
+                    return;
+                }
+                default -> ui.showMessage("Ungültige Auswahl! Bitte eine Zahl zwischen 0 und 5 eingeben.");
+            }
         }
     }
     public void showPersonalListMenu() {

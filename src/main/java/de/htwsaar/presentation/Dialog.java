@@ -20,6 +20,7 @@ public class Dialog extends UserInterface {
     }
 
     public int showMainMenu() {
+        System.out.println("==== MAIN MENU ====");
         System.out.println("1: Datenbanken auslesen");
         System.out.println("2: Persönliche Liste");
         System.out.println("3: Programm verlassen");
@@ -28,6 +29,7 @@ public class Dialog extends UserInterface {
 
     }
     public int showDatabaseMenu() {
+        System.out.println("==== DATABASE MENU ====");
         System.out.println("Bitte geben Sie eine Kategorie an.");
         System.out.println("1: GPU");
         System.out.println("2: CPU");
@@ -35,7 +37,8 @@ public class Dialog extends UserInterface {
         System.out.println("4: Netzteil");
         System.out.println("5: Mainboard");
         System.out.println("6: Gehäuse");
-        return readMinMaxInput(1, 6);
+        System.out.println("7: Zurück zum Hauptmenü");
+        return readMinMaxInput(1, 7);
 
     }
 

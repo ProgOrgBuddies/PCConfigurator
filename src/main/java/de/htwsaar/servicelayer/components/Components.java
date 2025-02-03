@@ -1,11 +1,6 @@
 package de.htwsaar.servicelayer.components;
 
-import java.io.Serializable;
-
-
-public abstract class Components implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public abstract class Components  {
 
     public String brand;
     public String name;
