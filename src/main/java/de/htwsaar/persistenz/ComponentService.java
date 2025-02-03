@@ -127,7 +127,7 @@ public class ComponentService {
     }
 
     public ComputerCase getOneComputerCase(int id) {
-        Record record = dsl.select().from("Case").where(COMPUTERCASE.CASE_ID.eq(id)).fetchOne();
+        Record record = dsl.select().from("ComputerCase").where(COMPUTERCASE.CASE_ID.eq(id)).fetchOne();
         if (record == null) {
             return null;
         }

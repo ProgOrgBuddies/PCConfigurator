@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 public class Logic {
 
+    // Map die persönliche Listen speichert. Map wird benutzt wegen zukünftiger Erweiterbarkeit, sonst wäre Array besser.
     Map<Integer, PersonalList> personalLists = new HashMap<>();
     private final ComponentService componentService;
     private UserInterface ui;
@@ -68,19 +69,27 @@ public class Logic {
         }
     }
     public void showPersonalListMenu() {
-        int choice = ui.showPersonalListMenu();
-        switch (choice) {
-            case 1 -> printPersonalLists();
-            case 2 -> createPersonalList();
-            case 3 -> deletePersonalList();
-            case 4 -> showMainMenu();
-            default -> ui.IllegalInput("Ungültige Auswahl.");
+        while (true) {
+            int choice = ui.showPersonalListMenu();
+            switch (choice) {
+                case 1 -> printPersonalLists();
+                case 2 -> createPersonalList();
+                case 3 -> deletePersonalList();
+                case 4 -> {
+                    return;
+                }
+                default -> ui.IllegalInput("Ungültige Auswahl.");
+            }
         }
 
     }
 
     public void printPersonalLists() {
-        personalLists.forEach((id, personalList) -> System.out.println("ID: " + id + ", List: " + personalList));
+        if (!personalLists.isEmpty()) {
+            personalLists.forEach((id, personalList) -> ui.showMessage("ID: " + id + ", List: " + personalList));
+        } else {
+            ui.showMessage("Es sind keine Listen vorhanden.");
+        }
     }
 
     public void createPersonalList() {
@@ -89,9 +98,17 @@ public class Logic {
             return;
         }
 
-        ui.showMessage("Bitte wähle eine ID für deine Liste:");
+        ui.showMessage("Bitte wähle eine ID für deine Liste. ID muss eine Zahl zwischen 1-3 sein.:");
         int choiceID = ui.readMinMaxInput(1, 3);
 
+        if (choiceID < 1 || choiceID > 3) {
+            ui.showMessage("Diese ID ist bereits belegt!");
+            return;
+        }
+        if (personalLists.containsKey(choiceID)) {
+            ui.showMessage("Diese ID ist bereits belegt!");
+            return;
+        }
 
         CPU selectedCPU = selectComponent(CPU.class, 0);
         GPU selectedGPU = selectComponent(GPU.class, 1);
@@ -101,6 +118,7 @@ public class Logic {
         ComputerCase selectedComputerCase = selectComponent(ComputerCase.class, 5);
 
         PersonalList newList = new PersonalList(choiceID, selectedGPU, selectedCPU, selectedRAM, selectedPowerUnit, selectedComputerCase, selectedMainboard);
+        ui.showMessage("Liste erfolgreich erstellt!");
         personalLists.put(choiceID, newList);
     }
 

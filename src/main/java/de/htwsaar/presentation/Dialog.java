@@ -41,6 +41,16 @@ public class Dialog extends UserInterface {
         return readMinMaxInput(1, 7);
 
     }
+    public int showPersonalListMenu() {
+        System.out.println("==== PERSONAL LIST MENU ====");
+        System.out.println("Bitte geben Sie eine Kategorie an.");
+        System.out.println("1: Bestehende Listen auslesen.");
+        System.out.println("2: Neue Liste erstellen.");
+        System.out.println("3: Bestehende Liste löschen.");
+        System.out.println("4: Zurück zum Hauptmenü.");
+        return readMinMaxInput(1, 4);
+
+    }
 
     //Hilfsmethode die einen Input zwischen 0 und einem max returnt
     public int readMinMaxInput(int min, int max) {
@@ -59,15 +69,6 @@ public class Dialog extends UserInterface {
                 IllegalInput("Ungültige Auswahl, bitte erneut eingeben!");
             }
         }
-    }
-
-    public int showPersonalListMenu() {
-        System.out.println("Bitte geben Sie eine Zahl an.");
-        System.out.println("1: Persönliche Listen anzeigen");
-        System.out.println("2: Persönliche Liste erstellen");
-        System.out.println("3: Persönliche Liste löschen");
-        System.out.println("4: Zurück zum Hauptmenü");
-        return readMinMaxInput(1, 4);
     }
 
     public int createPersonalListMenu() {
