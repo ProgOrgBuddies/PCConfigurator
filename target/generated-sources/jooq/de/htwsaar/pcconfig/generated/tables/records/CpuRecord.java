@@ -47,59 +47,45 @@ public class CpuRecord extends UpdatableRecordImpl<CpuRecord> {
     }
 
     /**
-     * Setter for <code>CPU.Marke</code>.
+     * Setter for <code>CPU.Brand</code>.
      */
-    public void setMarke(String value) {
+    public void setBrand(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>CPU.Marke</code>.
+     * Getter for <code>CPU.Brand</code>.
      */
-    public String getMarke() {
+    public String getBrand() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>CPU.Sockel</code>.
+     * Setter for <code>CPU.Cores</code>.
      */
-    public void setSockel(String value) {
+    public void setCores(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>CPU.Sockel</code>.
+     * Getter for <code>CPU.Cores</code>.
      */
-    public String getSockel() {
-        return (String) get(3);
+    public Integer getCores() {
+        return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>CPU.Kerne</code>.
+     * Setter for <code>CPU.Price</code>.
      */
-    public void setKerne(Integer value) {
+    public void setPrice(Float value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>CPU.Kerne</code>.
+     * Getter for <code>CPU.Price</code>.
      */
-    public Integer getKerne() {
-        return (Integer) get(4);
-    }
-
-    /**
-     * Setter for <code>CPU.Preis</code>.
-     */
-    public void setPreis(Float value) {
-        set(5, value);
-    }
-
-    /**
-     * Getter for <code>CPU.Preis</code>.
-     */
-    public Float getPreis() {
-        return (Float) get(5);
+    public Float getPrice() {
+        return (Float) get(4);
     }
 
     // -------------------------------------------------------------------------
@@ -125,15 +111,14 @@ public class CpuRecord extends UpdatableRecordImpl<CpuRecord> {
     /**
      * Create a detached, initialised CpuRecord
      */
-    public CpuRecord(Integer cpuId, String name, String marke, String sockel, Integer kerne, Float preis) {
+    public CpuRecord(Integer cpuId, String name, String brand, Integer cores, Float price) {
         super(Cpu.CPU);
 
         setCpuId(cpuId);
         setName(name);
-        setMarke(marke);
-        setSockel(sockel);
-        setKerne(kerne);
-        setPreis(preis);
+        setBrand(brand);
+        setCores(cores);
+        setPrice(price);
         resetChangedOnNotNull();
     }
 }

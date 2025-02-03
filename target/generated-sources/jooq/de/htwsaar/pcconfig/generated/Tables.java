@@ -4,11 +4,11 @@
 package de.htwsaar.pcconfig.generated;
 
 
-import de.htwsaar.pcconfig.generated.tables.Case;
+import de.htwsaar.pcconfig.generated.tables.Computercase;
 import de.htwsaar.pcconfig.generated.tables.Cpu;
 import de.htwsaar.pcconfig.generated.tables.Gpu;
 import de.htwsaar.pcconfig.generated.tables.Mainboard;
-import de.htwsaar.pcconfig.generated.tables.Netzteil;
+import de.htwsaar.pcconfig.generated.tables.Psu;
 import de.htwsaar.pcconfig.generated.tables.Ram;
 import de.htwsaar.pcconfig.generated.tables.Ssd;
 
@@ -20,9 +20,9 @@ import de.htwsaar.pcconfig.generated.tables.Ssd;
 public class Tables {
 
     /**
-     * The table <code>Case</code>.
+     * The table <code>ComputerCase</code>.
      */
-    public static final Case CASE = Case.CASE;
+    public static final Computercase COMPUTERCASE = Computercase.COMPUTERCASE;
 
     /**
      * The table <code>CPU</code>.
@@ -40,9 +40,9 @@ public class Tables {
     public static final Mainboard MAINBOARD = Mainboard.MAINBOARD;
 
     /**
-     * The table <code>Netzteil</code>.
+     * The table <code>PSU</code>.
      */
-    public static final Netzteil NETZTEIL = Netzteil.NETZTEIL;
+    public static final Psu PSU = Psu.PSU;
 
     /**
      * The table <code>RAM</code>.

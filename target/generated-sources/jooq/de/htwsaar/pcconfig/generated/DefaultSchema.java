@@ -4,11 +4,11 @@
 package de.htwsaar.pcconfig.generated;
 
 
-import de.htwsaar.pcconfig.generated.tables.Case;
+import de.htwsaar.pcconfig.generated.tables.Computercase;
 import de.htwsaar.pcconfig.generated.tables.Cpu;
 import de.htwsaar.pcconfig.generated.tables.Gpu;
 import de.htwsaar.pcconfig.generated.tables.Mainboard;
-import de.htwsaar.pcconfig.generated.tables.Netzteil;
+import de.htwsaar.pcconfig.generated.tables.Psu;
 import de.htwsaar.pcconfig.generated.tables.Ram;
 import de.htwsaar.pcconfig.generated.tables.Ssd;
 
@@ -34,9 +34,9 @@ public class DefaultSchema extends SchemaImpl {
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
 
     /**
-     * The table <code>Case</code>.
+     * The table <code>ComputerCase</code>.
      */
-    public final Case CASE = Case.CASE;
+    public final Computercase COMPUTERCASE = Computercase.COMPUTERCASE;
 
     /**
      * The table <code>CPU</code>.
@@ -54,9 +54,9 @@ public class DefaultSchema extends SchemaImpl {
     public final Mainboard MAINBOARD = Mainboard.MAINBOARD;
 
     /**
-     * The table <code>Netzteil</code>.
+     * The table <code>PSU</code>.
      */
-    public final Netzteil NETZTEIL = Netzteil.NETZTEIL;
+    public final Psu PSU = Psu.PSU;
 
     /**
      * The table <code>RAM</code>.
@@ -84,11 +84,11 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            Case.CASE,
+            Computercase.COMPUTERCASE,
             Cpu.CPU,
             Gpu.GPU,
             Mainboard.MAINBOARD,
-            Netzteil.NETZTEIL,
+            Psu.PSU,
             Ram.RAM,
             Ssd.SSD
         );

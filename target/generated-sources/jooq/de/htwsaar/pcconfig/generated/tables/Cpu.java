@@ -60,24 +60,19 @@ public class Cpu extends TableImpl<CpuRecord> {
     public final TableField<CpuRecord, String> NAME = createField(DSL.name("Name"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>CPU.Marke</code>.
+     * The column <code>CPU.Brand</code>.
      */
-    public final TableField<CpuRecord, String> MARKE = createField(DSL.name("Marke"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<CpuRecord, String> BRAND = createField(DSL.name("Brand"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>CPU.Sockel</code>.
+     * The column <code>CPU.Cores</code>.
      */
-    public final TableField<CpuRecord, String> SOCKEL = createField(DSL.name("Sockel"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<CpuRecord, Integer> CORES = createField(DSL.name("Cores"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>CPU.Kerne</code>.
+     * The column <code>CPU.Price</code>.
      */
-    public final TableField<CpuRecord, Integer> KERNE = createField(DSL.name("Kerne"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>CPU.Preis</code>.
-     */
-    public final TableField<CpuRecord, Float> PREIS = createField(DSL.name("Preis"), SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<CpuRecord, Float> PRICE = createField(DSL.name("Price"), SQLDataType.REAL.nullable(false), this, "");
 
     private Cpu(Name alias, Table<CpuRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

@@ -1,7 +1,6 @@
 package de.htwsaar.servicelayer;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import de.htwsaar.servicelayer.components.*;
 import de.htwsaar.persistenz.*;
@@ -116,7 +115,7 @@ public class Logic {
             }
         }
 
-        int id = ui.readMinMaxInput(0, 26);
+        int id = ui.readMinMaxInput(0, 50);
 
         Components component = switch (choice) {
             case 0 -> componentService.getOneCPU(id);

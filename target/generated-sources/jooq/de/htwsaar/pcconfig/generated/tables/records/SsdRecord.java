@@ -47,44 +47,44 @@ public class SsdRecord extends UpdatableRecordImpl<SsdRecord> {
     }
 
     /**
-     * Setter for <code>SSD.Marke</code>.
+     * Setter for <code>SSD.Brand</code>.
      */
-    public void setMarke(String value) {
+    public void setBrand(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>SSD.Marke</code>.
+     * Getter for <code>SSD.Brand</code>.
      */
-    public String getMarke() {
+    public String getBrand() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>SSD.Größe</code>.
+     * Setter for <code>SSD.Size</code>.
      */
-    public void setGröße(Integer value) {
+    public void setSize(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>SSD.Größe</code>.
+     * Getter for <code>SSD.Size</code>.
      */
-    public Integer getGröße() {
+    public Integer getSize() {
         return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>SSD.Preis</code>.
+     * Setter for <code>SSD.Price</code>.
      */
-    public void setPreis(Float value) {
+    public void setPrice(Float value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>SSD.Preis</code>.
+     * Getter for <code>SSD.Price</code>.
      */
-    public Float getPreis() {
+    public Float getPrice() {
         return (Float) get(4);
     }
 
@@ -111,14 +111,14 @@ public class SsdRecord extends UpdatableRecordImpl<SsdRecord> {
     /**
      * Create a detached, initialised SsdRecord
      */
-    public SsdRecord(Integer ssdId, String name, String marke, Integer größe, Float preis) {
+    public SsdRecord(Integer ssdId, String name, String brand, Integer size, Float price) {
         super(Ssd.SSD);
 
         setSsdId(ssdId);
         setName(name);
-        setMarke(marke);
-        setGröße(größe);
-        setPreis(preis);
+        setBrand(brand);
+        setSize(size);
+        setPrice(price);
         resetChangedOnNotNull();
     }
 }

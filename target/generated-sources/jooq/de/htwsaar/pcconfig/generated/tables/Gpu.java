@@ -60,9 +60,9 @@ public class Gpu extends TableImpl<GpuRecord> {
     public final TableField<GpuRecord, String> NAME = createField(DSL.name("Name"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>GPU.Marke</code>.
+     * The column <code>GPU.Brand</code>.
      */
-    public final TableField<GpuRecord, String> MARKE = createField(DSL.name("Marke"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<GpuRecord, String> BRAND = createField(DSL.name("Brand"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>GPU.VRAM</code>.
@@ -70,9 +70,9 @@ public class Gpu extends TableImpl<GpuRecord> {
     public final TableField<GpuRecord, Integer> VRAM = createField(DSL.name("VRAM"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>GPU.Preis</code>.
+     * The column <code>GPU.Price</code>.
      */
-    public final TableField<GpuRecord, Float> PREIS = createField(DSL.name("Preis"), SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<GpuRecord, Float> PRICE = createField(DSL.name("Price"), SQLDataType.REAL.nullable(false), this, "");
 
     private Gpu(Name alias, Table<GpuRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

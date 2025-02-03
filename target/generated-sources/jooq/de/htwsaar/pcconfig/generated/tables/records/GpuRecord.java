@@ -47,16 +47,16 @@ public class GpuRecord extends UpdatableRecordImpl<GpuRecord> {
     }
 
     /**
-     * Setter for <code>GPU.Marke</code>.
+     * Setter for <code>GPU.Brand</code>.
      */
-    public void setMarke(String value) {
+    public void setBrand(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>GPU.Marke</code>.
+     * Getter for <code>GPU.Brand</code>.
      */
-    public String getMarke() {
+    public String getBrand() {
         return (String) get(2);
     }
 
@@ -75,16 +75,16 @@ public class GpuRecord extends UpdatableRecordImpl<GpuRecord> {
     }
 
     /**
-     * Setter for <code>GPU.Preis</code>.
+     * Setter for <code>GPU.Price</code>.
      */
-    public void setPreis(Float value) {
+    public void setPrice(Float value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>GPU.Preis</code>.
+     * Getter for <code>GPU.Price</code>.
      */
-    public Float getPreis() {
+    public Float getPrice() {
         return (Float) get(4);
     }
 
@@ -111,14 +111,14 @@ public class GpuRecord extends UpdatableRecordImpl<GpuRecord> {
     /**
      * Create a detached, initialised GpuRecord
      */
-    public GpuRecord(Integer gpuId, String name, String marke, Integer vram, Float preis) {
+    public GpuRecord(Integer gpuId, String name, String brand, Integer vram, Float price) {
         super(Gpu.GPU);
 
         setGpuId(gpuId);
         setName(name);
-        setMarke(marke);
+        setBrand(brand);
         setVram(vram);
-        setPreis(preis);
+        setPrice(price);
         resetChangedOnNotNull();
     }
 }

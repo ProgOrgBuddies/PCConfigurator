@@ -53,18 +53,18 @@ public class ComponentService {
         }
     }
     public void getAllPowerUnitComponents() {
-        Result<Record> result = dsl.select().from("Netzteil").fetch();
+        Result<Record> result = dsl.select().from("PSU").fetch();
         for (Record record : result) {
-            Integer id = record.getValue(NETZTEIL.PSU_ID);
-            String name = record.getValue(NETZTEIL.NAME);
+            Integer id = record.getValue(PSU.PSU_ID);
+            String name = record.getValue(PSU.NAME);
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
     public void getAllCaseComponents() {
-        Result<Record> result = dsl.select().from("Case").fetch();
+        Result<Record> result = dsl.select().from("ComputerCase").fetch();
         for (Record record : result) {
-            Integer id = record.getValue(CASE.CASE_ID);
-            String name = record.getValue(CASE.NAME);
+            Integer id = record.getValue(COMPUTERCASE.CASE_ID);
+            String name = record.getValue(COMPUTERCASE.NAME);
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
@@ -74,9 +74,9 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
-            String brand = record.getValue(CPU.MARKE);
+            String brand = record.getValue(CPU.BRAND);
             String name = record.getValue(CPU.NAME);
-            Float price = record.getValue(CPU.PREIS);
+            Float price = record.getValue(CPU.PRICE);
             return new CPU(brand, name, price);
         }
 
@@ -86,9 +86,9 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
-            String brand = record.getValue(GPU.MARKE);
+            String brand = record.getValue(GPU.BRAND);
             String name = record.getValue(GPU.NAME);
-            Float price = record.getValue(GPU.PREIS);
+            Float price = record.getValue(GPU.PRICE);
             return new GPU(brand, name, price);
         }
     }
@@ -97,7 +97,7 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
-            String brand = record.getValue(RAM.MARKE);
+            String brand = record.getValue(RAM.BRAND);
             String name = record.getValue(RAM.NAME);
             Float price = record.getValue(RAM.PREIS);
             return new RAM(brand, name, price);
@@ -108,32 +108,32 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
-            String brand = record.getValue(MAINBOARD.MARKE);
+            String brand = record.getValue(MAINBOARD.BRAND);
             String name = record.getValue(MAINBOARD.NAME);
-            Float price = record.getValue(MAINBOARD.PREIS);
+            Float price = record.getValue(MAINBOARD.PRICE);
             return new Mainboard(brand, name, price);
         }
     }
 
     public PowerUnit getOnePowerUnit(int id) {
-        Record record = dsl.select().from("Netzteil").where(NETZTEIL.PSU_ID.eq(id)).fetchOne();
+        Record record = dsl.select().from("PSU").where(PSU.PSU_ID.eq(id)).fetchOne();
         if (record == null) {
             return null;
         }
-        String brand = record.getValue(NETZTEIL.MARKE);
-        String name = record.getValue(NETZTEIL.NAME);
-        Float price = record.getValue(NETZTEIL.PREIS);
+        String brand = record.getValue(PSU.BRAND);
+        String name = record.getValue(PSU.NAME);
+        Float price = record.getValue(PSU.PRICE);
         return new PowerUnit(brand, name, price);
     }
 
     public ComputerCase getOneComputerCase(int id) {
-        Record record = dsl.select().from("Case").where(CASE.CASE_ID.eq(id)).fetchOne();
+        Record record = dsl.select().from("Case").where(COMPUTERCASE.CASE_ID.eq(id)).fetchOne();
         if (record == null) {
             return null;
         }
-        String brand = "?";
-        String name = record.getValue(CASE.NAME);
-        Float price = record.getValue(CASE.PREIS);
+        String brand = record.getValue(COMPUTERCASE.BRAND);
+        String name = record.getValue(COMPUTERCASE.NAME);
+        Float price = record.getValue(COMPUTERCASE.PRICE);
         return new ComputerCase(brand, name, price);
     }
 

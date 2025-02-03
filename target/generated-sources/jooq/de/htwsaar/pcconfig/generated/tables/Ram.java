@@ -60,14 +60,14 @@ public class Ram extends TableImpl<RamRecord> {
     public final TableField<RamRecord, String> NAME = createField(DSL.name("Name"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>RAM.Marke</code>.
+     * The column <code>RAM.Brand</code>.
      */
-    public final TableField<RamRecord, String> MARKE = createField(DSL.name("Marke"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<RamRecord, String> BRAND = createField(DSL.name("Brand"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>RAM.Größe</code>.
+     * The column <code>RAM.Size</code>.
      */
-    public final TableField<RamRecord, Integer> GRÖSSE = createField(DSL.name("Größe"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<RamRecord, Integer> SIZE = createField(DSL.name("Size"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>RAM.Preis</code>.

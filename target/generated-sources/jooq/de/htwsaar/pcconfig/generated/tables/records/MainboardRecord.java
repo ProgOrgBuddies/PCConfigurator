@@ -47,16 +47,16 @@ public class MainboardRecord extends UpdatableRecordImpl<MainboardRecord> {
     }
 
     /**
-     * Setter for <code>Mainboard.Marke</code>.
+     * Setter for <code>Mainboard.Brand</code>.
      */
-    public void setMarke(String value) {
+    public void setBrand(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>Mainboard.Marke</code>.
+     * Getter for <code>Mainboard.Brand</code>.
      */
-    public String getMarke() {
+    public String getBrand() {
         return (String) get(2);
     }
 
@@ -75,31 +75,17 @@ public class MainboardRecord extends UpdatableRecordImpl<MainboardRecord> {
     }
 
     /**
-     * Setter for <code>Mainboard.Sockel</code>.
+     * Setter for <code>Mainboard.Price</code>.
      */
-    public void setSockel(String value) {
+    public void setPrice(Float value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>Mainboard.Sockel</code>.
+     * Getter for <code>Mainboard.Price</code>.
      */
-    public String getSockel() {
-        return (String) get(4);
-    }
-
-    /**
-     * Setter for <code>Mainboard.Preis</code>.
-     */
-    public void setPreis(Float value) {
-        set(5, value);
-    }
-
-    /**
-     * Getter for <code>Mainboard.Preis</code>.
-     */
-    public Float getPreis() {
-        return (Float) get(5);
+    public Float getPrice() {
+        return (Float) get(4);
     }
 
     // -------------------------------------------------------------------------
@@ -125,15 +111,14 @@ public class MainboardRecord extends UpdatableRecordImpl<MainboardRecord> {
     /**
      * Create a detached, initialised MainboardRecord
      */
-    public MainboardRecord(Integer mbId, String name, String marke, String form, String sockel, Float preis) {
+    public MainboardRecord(Integer mbId, String name, String brand, String form, Float price) {
         super(Mainboard.MAINBOARD);
 
         setMbId(mbId);
         setName(name);
-        setMarke(marke);
+        setBrand(brand);
         setForm(form);
-        setSockel(sockel);
-        setPreis(preis);
+        setPrice(price);
         resetChangedOnNotNull();
     }
 }

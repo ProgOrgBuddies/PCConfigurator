@@ -60,19 +60,19 @@ public class Ssd extends TableImpl<SsdRecord> {
     public final TableField<SsdRecord, String> NAME = createField(DSL.name("Name"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>SSD.Marke</code>.
+     * The column <code>SSD.Brand</code>.
      */
-    public final TableField<SsdRecord, String> MARKE = createField(DSL.name("Marke"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<SsdRecord, String> BRAND = createField(DSL.name("Brand"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>SSD.Größe</code>.
+     * The column <code>SSD.Size</code>.
      */
-    public final TableField<SsdRecord, Integer> GRÖSSE = createField(DSL.name("Größe"), SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<SsdRecord, Integer> SIZE = createField(DSL.name("Size"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>SSD.Preis</code>.
+     * The column <code>SSD.Price</code>.
      */
-    public final TableField<SsdRecord, Float> PREIS = createField(DSL.name("Preis"), SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<SsdRecord, Float> PRICE = createField(DSL.name("Price"), SQLDataType.REAL.nullable(false), this, "");
 
     private Ssd(Name alias, Table<SsdRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

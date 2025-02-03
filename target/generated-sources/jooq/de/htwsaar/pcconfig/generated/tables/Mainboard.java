@@ -60,9 +60,9 @@ public class Mainboard extends TableImpl<MainboardRecord> {
     public final TableField<MainboardRecord, String> NAME = createField(DSL.name("Name"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>Mainboard.Marke</code>.
+     * The column <code>Mainboard.Brand</code>.
      */
-    public final TableField<MainboardRecord, String> MARKE = createField(DSL.name("Marke"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<MainboardRecord, String> BRAND = createField(DSL.name("Brand"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>Mainboard.Form</code>.
@@ -70,14 +70,9 @@ public class Mainboard extends TableImpl<MainboardRecord> {
     public final TableField<MainboardRecord, String> FORM = createField(DSL.name("Form"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>Mainboard.Sockel</code>.
+     * The column <code>Mainboard.Price</code>.
      */
-    public final TableField<MainboardRecord, String> SOCKEL = createField(DSL.name("Sockel"), SQLDataType.CLOB.nullable(false), this, "");
-
-    /**
-     * The column <code>Mainboard.Preis</code>.
-     */
-    public final TableField<MainboardRecord, Float> PREIS = createField(DSL.name("Preis"), SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<MainboardRecord, Float> PRICE = createField(DSL.name("Price"), SQLDataType.REAL.nullable(false), this, "");
 
     private Mainboard(Name alias, Table<MainboardRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
