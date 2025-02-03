@@ -100,9 +100,6 @@ public class Logic {
         personalLists.put(choiceID, newList);
     }
 
-    /**
-     * Wählt eine Komponente anhand des übergebenen Typs und Choice-Indexes aus.
-     */
     private <T extends Components> T selectComponent(Class<T> type, int choice) {
         ui.showMessage("Bitte wähle eine " + getComponentName(choice) + " aus:");
 

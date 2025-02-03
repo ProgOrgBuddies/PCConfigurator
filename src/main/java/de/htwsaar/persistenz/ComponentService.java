@@ -1,6 +1,5 @@
 package de.htwsaar.persistenz;
 
-import de.htwsaar.pcconfig.generated.tables.Netzteil;
 import de.htwsaar.servicelayer.components.*;
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -9,8 +8,6 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Map;
 
 import static de.htwsaar.pcconfig.generated.Tables.*;
 
