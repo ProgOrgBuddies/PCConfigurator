@@ -1,9 +1,4 @@
 package de.htwsaar.servicelayer;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,114 +13,152 @@ import java.sql.SQLException;
 public class Logic {
 
     Map<Integer, PersonalList> personalLists = new HashMap<>();
-    Map<Integer, GPU> gpuMap;
-    Map<Integer, CPU> cpuMap;
-    Map<Integer, RAM> ramMap;
-    Map<Integer, Mainboard> mainboardMap;
-    Map<Integer, PowerUnit> powerUnitMap;
-    Map<Integer, ComputerCase> computerCaseMap;
+    private final ComponentService componentService;
+    private UserInterface ui;
+
+    public Logic (UserInterface ui) {
+        componentService = new ComponentService(connectToDatabase());
+        this.ui = ui;
+    }
 
     public Connection connectToDatabase() {
-        try (Connection connection = DatabaseManager.connect()) {
-            System.out.println("Listen werden initialisiert....");
+        try {
+            Connection connection = DatabaseManager.connect();
+            System.out.println("Connected to database");
             return connection;
-        } catch (SQLException e)  {
+        } catch (SQLException e) {
             System.err.println("Fehler bei der Datenbankverbindung: " + e.getMessage());
         }
-
         return null;
     }
 
-    public void initiateLists() {
-        ComponentService service = new ComponentService(connectToDatabase());
+    public void startProgramm() {
+        showMainMenu();
 
-        gpuMap = GPU.readGPUList();
-        cpuMap = service.returnCPUComponentMap();
-        ramMap = RAM.readRAMList();
-        mainboardMap = Mainboard.readMainboardList();
-        powerUnitMap = PowerUnit.readPowerUnitList();
-        computerCaseMap = ComputerCase.readComputerCaseList();
+    }
+    public void showMainMenu() {
+        int input = ui.showMainMenu();
+        switch (input) {
+            case 1:
+                showDatabaseMenu();
+                break;
+            case 2:
+                showPersonalListMenu();
+                break;
+            case 3:
+                return;
+            default:
+                ui.IllegalInput("Error");
+        }
+    }
+    public void showDatabaseMenu() {
+        int input = ui.showDatabaseMenu();
+        switch (input) {
+            case 1 -> componentService.getAllGPUComponents();
+            case 2 -> componentService.getAllCPUComponents();
+            case 3 -> componentService.getAllRAMComponents();
+            case 4 -> componentService.getAllPowerUnitComponents();
+            case 5 -> componentService.getAllMainboardComponents();
+            case 6 -> componentService.getAllCaseComponents();
+            default -> ui.showMessage("Ungültige Auswahl! Bitte eine Zahl zwischen 0 und 5 eingeben.");
+        }
+    }
+    public void showPersonalListMenu() {
+        int choice = ui.showPersonalListMenu();
+        switch (choice) {
+            case 1 -> printPersonalLists();
+            case 2 -> createPersonalList();
+            case 3 -> deletePersonalList();
+            case 4 -> showMainMenu();
+            default -> ui.IllegalInput("Ungültige Auswahl.");
+        }
+
     }
 
     public void printPersonalLists() {
         personalLists.forEach((id, personalList) -> System.out.println("ID: " + id + ", List: " + personalList));
     }
 
-    public PersonalList createPersonalList(int choiceID, int gpuID, int cpuID, int ramID, int powerUnitID, int computerCaseID, int mainboardID) {
+    public void createPersonalList() {
         if (personalLists.size() > 3) {
-            System.out.println("Sie haben bereits 3 persönliche Listen erstellt. Bitte löschen Sie eine, um eine neue zu erstellen.");
-            return null;
+            ui.IllegalInput("Sie haben bereits 3 persönliche Listen erstellt. Bitte löschen Sie eine, um eine neue zu erstellen.");
+            return;
         }
 
-        GPU selectedGPU = selectComponent(gpuID, gpuMap);
-        CPU selectedCPU = selectComponent(cpuID, cpuMap);
-        RAM selectedRAM = selectComponent(ramID, ramMap);
-        Mainboard selectedMainboard = selectComponent(mainboardID, mainboardMap);
-        ComputerCase selectedComputerCase = selectComponent(computerCaseID, computerCaseMap);
-        PowerUnit selectedPowerUnit = selectComponent(powerUnitID, powerUnitMap);
+        ui.showMessage("Bitte wähle eine ID für deine Liste:");
+        int choiceID = ui.readMinMaxInput(1, 3);
+
+
+        CPU selectedCPU = selectComponent(CPU.class, 0);
+        GPU selectedGPU = selectComponent(GPU.class, 1);
+        RAM selectedRAM = selectComponent(RAM.class, 2);
+        Mainboard selectedMainboard = selectComponent(Mainboard.class, 3);
+        PowerUnit selectedPowerUnit = selectComponent(PowerUnit.class, 4);
+        ComputerCase selectedComputerCase = selectComponent(ComputerCase.class, 5);
 
         PersonalList newList = new PersonalList(choiceID, selectedGPU, selectedCPU, selectedRAM, selectedPowerUnit, selectedComputerCase, selectedMainboard);
         personalLists.put(choiceID, newList);
-        return newList;
-
     }
 
-    private <T extends Components> T selectComponent(int choice, Map <Integer, T> componentMap) {
-        return componentMap.get(choice);
+    /**
+     * Wählt eine Komponente anhand des übergebenen Typs und Choice-Indexes aus.
+     */
+    private <T extends Components> T selectComponent(Class<T> type, int choice) {
+        ui.showMessage("Bitte wähle eine " + getComponentName(choice) + " aus:");
 
-    }
-
-    // Muss noch implementiert werden
-    public void savePersonalListTOFile(String filePath) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            oos.writeObject(personalLists);
-            System.out.println("Persönliche Liste erfolgreich gespeichert.");
-        } catch (IOException e) {
-            e.printStackTrace();
-
+        switch (choice) {
+            case 0 -> componentService.getAllCPUComponents();
+            case 1 -> componentService.getAllGPUComponents();
+            case 2 -> componentService.getAllRAMComponents();
+            case 3 -> componentService.getAllMainboardComponents();
+            case 4 -> componentService.getAllPowerUnitComponents();
+            case 5 -> componentService.getAllCaseComponents();
+            default -> {
+                ui.IllegalInput("Ungültige Wahl.");
+                return null;
+            }
         }
 
+        int id = ui.readMinMaxInput(0, 26);
+
+        Components component = switch (choice) {
+            case 0 -> componentService.getOneCPU(id);
+            case 1 -> componentService.getOneGPU(id);
+            case 2 -> componentService.getOneRAM(id);
+            case 3 -> componentService.getOneMainboard(id);
+            case 4 -> componentService.getOnePowerUnit(id);
+            case 5 -> componentService.getOneComputerCase(id);
+            default -> null;
+        };
+
+        return type.cast(component);
     }
 
-    @SuppressWarnings("unchecked")
-    public void loadPersonalListsFromFile(String filePath) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
-            personalLists = (Map<Integer, PersonalList>) ois.readObject();
-            System.out.println("Persönliche Listen wurden erfolgreich geladen.");
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Fehler beim Laden der persönlichen Listen: " + e.getMessage());
-        }
+    /**
+     * Hilfsmethode, um den Namen der Komponente auszugeben.
+     */
+    private String getComponentName(int choice) {
+        return switch (choice) {
+            case 0 -> "CPU";
+            case 1 -> "GPU";
+            case 2 -> "RAM";
+            case 3 -> "Mainboard";
+            case 4 -> "Netzteil";
+            case 5 -> "Gehäuse";
+            default -> "Unbekannte Komponente";
+        };
     }
 
-
-
-    public void deletePersonalList(Scanner scanner) {
+    public void deletePersonalList() {
         printPersonalLists();
-        int choice = scanner.nextInt();
-        personalLists.remove(choice);
-    }
+        int choice = ui.readMinMaxInput(1, 3);
+        if (personalLists.containsKey(choice)) {
+            personalLists.remove(choice);
+            ui.showMessage("Liste mit ID " + choice + " wurde gelöscht.");
+        } else {
+            ui.IllegalInput("Keine Liste mit dieser ID gefunden.");
+        }
 
-    public void printGPUDatabase() {
-        gpuMap.forEach((id, gpu) -> System.out.println(id + ": " + gpu));
-    }
-
-    public void printCPUDatabase() {
-        cpuMap.forEach((id, cpu) -> System.out.println(id + ": " + cpu));
-    }
-
-    public void printRAMDatabase() {
-        ramMap.forEach((id, ram) -> System.out.println(id + ": " + ram));
-    }
-
-    public void printComputerCaseDatabase() {
-        computerCaseMap.forEach((id, computerCase) -> System.out.println(id + ": " + computerCase));
-    }
-
-    public void printPowerUnitDatabase() {
-        powerUnitMap.forEach((id, powerUnit) -> System.out.println(id + ": " + powerUnit));
-    }
-    public void printMainboardDatabase() {
-        mainboardMap.forEach((id, mainboard) -> System.out.println(id + ": " + mainboard));
     }
 
 }
