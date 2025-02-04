@@ -70,9 +70,9 @@ public class Ram extends TableImpl<RamRecord> {
     public final TableField<RamRecord, Integer> SIZE = createField(DSL.name("Size"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>RAM.Preis</code>.
+     * The column <code>RAM.Price</code>.
      */
-    public final TableField<RamRecord, Float> PREIS = createField(DSL.name("Preis"), SQLDataType.REAL.nullable(false), this, "");
+    public final TableField<RamRecord, Float> PRICE = createField(DSL.name("Price"), SQLDataType.REAL.nullable(false), this, "");
 
     private Ram(Name alias, Table<RamRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);

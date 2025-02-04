@@ -75,16 +75,16 @@ public class RamRecord extends UpdatableRecordImpl<RamRecord> {
     }
 
     /**
-     * Setter for <code>RAM.Preis</code>.
+     * Setter for <code>RAM.Price</code>.
      */
-    public void setPreis(Float value) {
+    public void setPrice(Float value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>RAM.Preis</code>.
+     * Getter for <code>RAM.Price</code>.
      */
-    public Float getPreis() {
+    public Float getPrice() {
         return (Float) get(4);
     }
 
@@ -111,14 +111,14 @@ public class RamRecord extends UpdatableRecordImpl<RamRecord> {
     /**
      * Create a detached, initialised RamRecord
      */
-    public RamRecord(Integer ramId, String name, String brand, Integer size, Float preis) {
+    public RamRecord(Integer ramId, String name, String brand, Integer size, Float price) {
         super(Ram.RAM);
 
         setRamId(ramId);
         setName(name);
         setBrand(brand);
         setSize(size);
-        setPreis(preis);
+        setPrice(price);
         resetChangedOnNotNull();
     }
 }

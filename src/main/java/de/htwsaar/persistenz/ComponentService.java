@@ -99,7 +99,7 @@ public class ComponentService {
         } else {
             String brand = record.getValue(RAM.BRAND);
             String name = record.getValue(RAM.NAME);
-            Float price = record.getValue(RAM.PREIS);
+            Float price = record.getValue(RAM.PRICE);
             return new RAM(brand, name, price);
         }
     }
