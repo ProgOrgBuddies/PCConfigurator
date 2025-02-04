@@ -5,9 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    private static final String URL = "jdbc:sqlite:src/main/resources/PC_ComponentsDB.db";
+    private static final String COMPONENTS_DB_URL = "jdbc:sqlite:src/main/resources/PC_ComponentsDB.db";
+    private static final String PERSONAL_LIST_DB_URL = "jdbc:sqlite:src/main/resources/PersonalList.db";
 
-    public static Connection connect() throws SQLException {
-        return DriverManager.getConnection(URL);
+    public static Connection connectComponentsDB() throws SQLException {
+        return DriverManager.getConnection(COMPONENTS_DB_URL);
+    }
+
+    public static Connection connectPersonalListDB() throws SQLException {
+        return DriverManager.getConnection(PERSONAL_LIST_DB_URL);
     }
 }

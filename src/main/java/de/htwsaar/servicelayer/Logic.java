@@ -11,19 +11,33 @@ import java.sql.SQLException;
 
 public class Logic {
 
-    // Map die persönliche Listen speichert. Map wird benutzt wegen zukünftiger Erweiterbarkeit, sonst wäre Array besser.
+    // Map die persönliche Listen speichert. Dient als eine Art Cache.
     Map<Integer, PersonalList> personalLists = new HashMap<>();
     private final ComponentService componentService;
+    private final PersonalListService personalListService;
     private UserInterface ui;
 
     public Logic (UserInterface ui) {
-        componentService = new ComponentService(connectToDatabase());
         this.ui = ui;
+        Connection componentConnection = connectToComponentDatabase();
+        this.componentService = componentConnection != null ? new ComponentService(componentConnection) : null;
+        Connection personalListConnection = connectToPersonalListDatabase();
+        this.personalListService = personalListConnection != null ? new PersonalListService(personalListConnection) : null;
     }
 
-    public Connection connectToDatabase() {
+    public Connection connectToComponentDatabase() {
         try {
-            Connection connection = DatabaseManager.connect();
+            Connection connection = DatabaseManager.connectComponentsDB();
+            System.out.println("Connected to database");
+            return connection;
+        } catch (SQLException e) {
+            System.err.println("Fehler bei der Datenbankverbindung: " + e.getMessage());
+        }
+        return null;
+    }
+    public Connection connectToPersonalListDatabase() {
+        try {
+            Connection connection = DatabaseManager.connectPersonalListDB();
             System.out.println("Connected to database");
             return connection;
         } catch (SQLException e) {
@@ -32,7 +46,13 @@ public class Logic {
         return null;
     }
 
-    public void startProgramm() {
+    public void startProgram() {
+        if (personalListService != null) {
+            personalLists.clear();
+            personalLists = personalListService.loadPersonalList();
+        } else {
+            System.err.println("Fehler: personalListService ist nicht initialisiert.");
+        }
         showMainMenu();
 
     }
@@ -102,13 +122,14 @@ public class Logic {
         int choiceID = ui.readMinMaxInput(1, 3);
 
         if (choiceID < 1 || choiceID > 3) {
+            ui.showMessage("Ungültige Auswahl.");
+            return;
+        }
+        if (personalLists.containsKey(choiceID) && isValidPersonalList(personalLists.get(choiceID))) {
             ui.showMessage("Diese ID ist bereits belegt!");
             return;
         }
-        if (personalLists.containsKey(choiceID)) {
-            ui.showMessage("Diese ID ist bereits belegt!");
-            return;
-        }
+        personalListService.deletePersonalList(choiceID);
 
         CPU selectedCPU = selectComponent(CPU.class, 0);
         GPU selectedGPU = selectComponent(GPU.class, 1);
@@ -118,7 +139,8 @@ public class Logic {
         ComputerCase selectedComputerCase = selectComponent(ComputerCase.class, 5);
 
         PersonalList newList = new PersonalList(choiceID, selectedGPU, selectedCPU, selectedRAM, selectedPowerUnit, selectedComputerCase, selectedMainboard);
-        ui.showMessage("Liste erfolgreich erstellt!");
+        personalListService.savePersonalList(newList);
+        ui.showMessage("Liste wurde erfolgreich erstellt und gespeichert.!");
         personalLists.put(choiceID, newList);
     }
 
@@ -173,11 +195,18 @@ public class Logic {
         int choice = ui.readMinMaxInput(1, 3);
         if (personalLists.containsKey(choice)) {
             personalLists.remove(choice);
+            personalListService.deletePersonalList(choice);
             ui.showMessage("Liste mit ID " + choice + " wurde gelöscht.");
         } else {
             ui.IllegalInput("Keine Liste mit dieser ID gefunden.");
         }
 
     }
+    private boolean isValidPersonalList(PersonalList list) {
+        if (list == null) return false;
+        return list.getCpu() != null || list.getGpu() != null || list.getRam() != null ||
+                list.getMainboard() != null || list.getPowerUnit() != null || list.getComputerCase() != null;
+    }
+
 
 }

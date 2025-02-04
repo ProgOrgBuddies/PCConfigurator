@@ -2,18 +2,29 @@ package de.htwsaar.servicelayer.components;
 
 public abstract class Components  {
 
-    public String brand;
-    public String name;
-    public float price;
+    private String brand;
+    private String name;
+    private float price;
+    private int id;
 
-    public Components(String brand, String name, float price) {
+    public Components(int id, String brand, String name, float price) {
         this.brand = brand;
         this.name = name;
         this.price = price;
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "Brand: " + brand + ", Name: " + name + ", Price: " + price;
+    }
+    public int getId() {
+        return id;
+    }
+    public String getBrand() {
+        return brand;
+    }
+    public String getName() {
+        return name;
     }
 }

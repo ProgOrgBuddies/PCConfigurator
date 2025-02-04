@@ -15,7 +15,7 @@ public class Dialog extends UserInterface {
 
     public void start() {
         logic = new Logic(this);
-        logic.startProgramm();
+        logic.startProgram();
 
     }
 

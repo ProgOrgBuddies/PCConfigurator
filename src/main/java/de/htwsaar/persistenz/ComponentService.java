@@ -9,7 +9,9 @@ import org.jooq.impl.DSL;
 
 import java.sql.Connection;
 
-import static de.htwsaar.pcconfig.generated.Tables.*;
+import static de.htwsaar.pcconfig.generated.components.Tables.*;
+
+// Klasse die PC-Komponenten aus der Datenbank PC_ComponentsDB verwaltet (read-only)
 
 public class ComponentService {
     private final DSLContext dsl;
@@ -74,10 +76,11 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
+            int idC = record.getValue(CPU.CPU_ID);
             String brand = record.getValue(CPU.BRAND);
             String name = record.getValue(CPU.NAME);
             Float price = record.getValue(CPU.PRICE);
-            return new CPU(brand, name, price);
+            return new CPU(idC, brand, name, price);
         }
 
     }
@@ -86,10 +89,11 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
+            int idG = record.getValue(GPU.GPU_ID);
             String brand = record.getValue(GPU.BRAND);
             String name = record.getValue(GPU.NAME);
             Float price = record.getValue(GPU.PRICE);
-            return new GPU(brand, name, price);
+            return new GPU(idG, brand, name, price);
         }
     }
     public RAM getOneRAM(int id) {
@@ -97,10 +101,11 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
+            int idR = record.getValue(RAM.RAM_ID);
             String brand = record.getValue(RAM.BRAND);
             String name = record.getValue(RAM.NAME);
             Float price = record.getValue(RAM.PRICE);
-            return new RAM(brand, name, price);
+            return new RAM(idR, brand, name, price);
         }
     }
     public Mainboard getOneMainboard(int id) {
@@ -108,10 +113,11 @@ public class ComponentService {
         if (record == null) {
             return null;
         } else {
+            int idM = record.getValue(MAINBOARD.MB_ID);
             String brand = record.getValue(MAINBOARD.BRAND);
             String name = record.getValue(MAINBOARD.NAME);
             Float price = record.getValue(MAINBOARD.PRICE);
-            return new Mainboard(brand, name, price);
+            return new Mainboard(idM, brand, name, price);
         }
     }
 
@@ -120,10 +126,11 @@ public class ComponentService {
         if (record == null) {
             return null;
         }
+        int idP = record.getValue(PSU.PSU_ID);
         String brand = record.getValue(PSU.BRAND);
         String name = record.getValue(PSU.NAME);
         Float price = record.getValue(PSU.PRICE);
-        return new PowerUnit(brand, name, price);
+        return new PowerUnit(idP, brand, name, price);
     }
 
     public ComputerCase getOneComputerCase(int id) {
@@ -131,10 +138,11 @@ public class ComponentService {
         if (record == null) {
             return null;
         }
+        int idC = record.getValue(COMPUTERCASE.CASE_ID);
         String brand = record.getValue(COMPUTERCASE.BRAND);
         String name = record.getValue(COMPUTERCASE.NAME);
         Float price = record.getValue(COMPUTERCASE.PRICE);
-        return new ComputerCase(brand, name, price);
+        return new ComputerCase(idC, brand, name, price);
     }
 
 
