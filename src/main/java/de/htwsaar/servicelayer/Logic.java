@@ -22,7 +22,7 @@ public class Logic {
         Connection componentConnection = connectToComponentDatabase();
         this.componentService = componentConnection != null ? new ComponentService(componentConnection) : null;
         Connection personalListConnection = connectToPersonalListDatabase();
-        this.personalListService = personalListConnection != null ? new PersonalListService(personalListConnection) : null;
+        this.personalListService = personalListConnection != null ? new PersonalListService(personalListConnection, componentService) : null;
     }
 
     public Connection connectToComponentDatabase() {
@@ -53,6 +53,7 @@ public class Logic {
         } else {
             System.err.println("Fehler: personalListService ist nicht initialisiert.");
         }
+
         showMainMenu();
 
     }

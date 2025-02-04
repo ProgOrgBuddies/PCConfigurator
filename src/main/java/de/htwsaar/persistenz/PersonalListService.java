@@ -21,9 +21,17 @@ public class PersonalListService {
     private final DSLContext dsl;
     private final ComponentService componentService;
 
-    public PersonalListService(Connection connection) {
+    public PersonalListService(Connection connection, ComponentService componentService) {
         this.dsl = DSL.using(connection, SQLDialect.SQLITE);
-        this.componentService = new ComponentService(connection);
+        this.componentService = componentService;
+        System.out.println("Ich wurde aufgerufen");
+
+        try {
+            // Logge die Verbindungs-URL
+            System.out.println("Verbindung zur Datenbank: " + connection.getMetaData().getURL());
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Abrufen der Verbindungs-URL: " + e.getMessage());
+        }
     }
 
     public void savePersonalList(PersonalList personalList) {
@@ -76,5 +84,6 @@ public class PersonalListService {
                 .where(field("PL_ID").eq(id))
                 .execute();
     }
+
 }
 

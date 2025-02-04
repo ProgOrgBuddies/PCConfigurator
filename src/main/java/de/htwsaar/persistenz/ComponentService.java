@@ -8,6 +8,7 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import static de.htwsaar.pcconfig.generated.components.Tables.*;
 
@@ -17,7 +18,18 @@ public class ComponentService {
     private final DSLContext dsl;
 
     public ComponentService(Connection connection) {
-        this.dsl = DSL.using(connection, SQLDialect.SQLITE);
+        if (connection != null) {
+            this.dsl = DSL.using(connection, SQLDialect.SQLITE);
+        } else {
+            throw new IllegalArgumentException("Connection is null");
+        }
+
+        try {
+            // Logge die Verbindungs-URL
+            System.out.println("Verbindung zur Datenbank: " + connection.getMetaData().getURL());
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Abrufen der Verbindungs-URL: " + e.getMessage());
+        }
     }
 
     public void getAllRAMComponents() {
