@@ -64,19 +64,19 @@ public class CreatePersonalListMenu {
 
         ramButton.setBounds(40, 240, 100, 40);
         ramButton.setFocusable(false);
-        ramButton.addActionListener(e -> {RAMPage ramPage = new RAMPage();});
+        ramButton.addActionListener(e -> {new RAMPage(this);});
 
         mainboardButton.setBounds(40, 300, 100, 40);
         mainboardButton.setFocusable(false);
-        mainboardButton.addActionListener(e -> {MBPage mbPage = new MBPage();});
+        mainboardButton.addActionListener(e -> {new MBPage(this);});
 
         caseButton.setBounds(40, 360, 100, 40);
         caseButton.setFocusable(false);
-        caseButton.addActionListener(e -> {CasePage casePage = new CasePage();});
+        caseButton.addActionListener(e -> {new CasePage(this);});
 
         powersupplyButton.setBounds(40, 420, 100, 40);
         powersupplyButton.setFocusable(false);
-        powersupplyButton.addActionListener(e -> {PSPage psPage = new PSPage();});
+        powersupplyButton.addActionListener(e -> {new PSPage(this);});
 
         returnButton.setBounds(560, 680, 200, 40);
         returnButton.setFocusable(false);
@@ -115,12 +115,23 @@ public class CreatePersonalListMenu {
     public void updateLabel(String component, String newText){
         switch (component) {
             case "CPU":
-                cpuLabel.setText(newText);
+                cpuLabel.setText("Selected: "+ newText);
                 break;
             case "GPU":
-                gpuLabel.setText(newText);
+                gpuLabel.setText("Selected: "+newText);
                 break;
-
+            case "case":
+                caseLabel.setText("Selected: "+newText);
+                break;
+            case "mainboard":
+                mainboardLabel.setText("Selected: "+newText);
+                break;
+            case "ps":
+                powerLabel.setText("Selected: "+newText);
+                break;
+            case "RAM":
+                ramLabel.setText("Selected: "+newText);
+                break;
         }
     }
     // Save-Methode implementieren die wenn Liste vollständig und Save-Knopf gedrückt wird mir die Integer-Values von jeder ID von jeder Komponente returned
