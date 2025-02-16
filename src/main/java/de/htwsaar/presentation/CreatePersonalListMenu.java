@@ -2,11 +2,16 @@ package de.htwsaar.presentation;
 
 import de.htwsaar.presentation.componentPages.*;
 
+import java.awt.Event;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class CreatePersonalListMenu {
 
@@ -30,6 +35,7 @@ public class CreatePersonalListMenu {
     JButton saveButton = new JButton("Save list.");
     JButton returnButton = new JButton("Return to menu.");
 
+    JPanel controlPanel = new JPanel();
 
     CreatePersonalListMenu(){
 
@@ -81,11 +87,19 @@ public class CreatePersonalListMenu {
         returnButton.setBounds(560, 680, 200, 40);
         returnButton.setFocusable(false);
         returnButton.addActionListener(e -> {
+            GUI gui = new GUI();
+            gui.start();
             frame.dispose();});
 
         saveButton.setBounds(40, 680, 200, 40);
         saveButton.setFocusable(false);
-        saveButton.addActionListener(null);
+        saveButton.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e){
+                int selectedID = getSelectedID();
+            }
+
+        });
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
@@ -136,5 +150,23 @@ public class CreatePersonalListMenu {
     }
     // Save-Methode implementieren die wenn Liste vollständig und Save-Knopf gedrückt wird mir die Integer-Values von jeder ID von jeder Komponente returned
 
+    public int getSelectedID(){
+
+        String[] options = {"ID1", "ID2", "ID3"};
+
+        int output = JOptionPane.showOptionDialog(
+            frame,
+            "Choose list ID: ", 
+            "", 
+            JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.QUESTION_MESSAGE, 
+            null, 
+            options, 
+            options[0]
+        );
+
+        return output;
+
+    }
 
 }
