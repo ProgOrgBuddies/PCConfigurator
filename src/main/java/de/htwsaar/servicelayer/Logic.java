@@ -76,12 +76,12 @@ public class Logic {
         while (true) {
             int input = ui.showDatabaseMenu();
             switch (input) {
-                case 1 -> componentService.getAllGPUComponents();
-                case 2 -> componentService.getAllCPUComponents();
-                case 3 -> componentService.getAllRAMComponents();
-                case 4 -> componentService.getAllPowerUnitComponents();
-                case 5 -> componentService.getAllMainboardComponents();
-                case 6 -> componentService.getAllCaseComponents();
+                case 1 -> componentService.printAllGPUComponents();
+                case 2 -> componentService.printAllCPUComponents();
+                case 3 -> componentService.printAllRAMComponents();
+                case 4 -> componentService.printAllPowerUnitComponents();
+                case 5 -> componentService.printAllMainboardComponents();
+                case 6 -> componentService.printAllCaseComponents();
                 case 7 -> {
                     return;
                 }
@@ -149,12 +149,12 @@ public class Logic {
         ui.showMessage("Bitte wähle eine " + getComponentName(choice) + " aus:");
 
         switch (choice) {
-            case 0 -> componentService.getAllCPUComponents();
-            case 1 -> componentService.getAllGPUComponents();
-            case 2 -> componentService.getAllRAMComponents();
-            case 3 -> componentService.getAllMainboardComponents();
-            case 4 -> componentService.getAllPowerUnitComponents();
-            case 5 -> componentService.getAllCaseComponents();
+            case 0 -> componentService.printAllCPUComponents();
+            case 1 -> componentService.printAllGPUComponents();
+            case 2 -> componentService.printAllRAMComponents();
+            case 3 -> componentService.printAllMainboardComponents();
+            case 4 -> componentService.printAllPowerUnitComponents();
+            case 5 -> componentService.printAllCaseComponents();
             default -> {
                 ui.IllegalInput("Ungültige Wahl.");
                 return null;

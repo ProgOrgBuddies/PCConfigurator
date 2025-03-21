@@ -32,7 +32,11 @@ public class ComponentService {
         }
     }
 
-    public void getAllRAMComponents() {
+    /* 
+     * Methoden um alle Komponenten die in der entsprechenden Datenbank ausliest.
+     */
+
+    public void printAllRAMComponents() {
         Result<Record> result = dsl.select().from("RAM").fetch();
 
         for (Record record : result) {
@@ -42,7 +46,7 @@ public class ComponentService {
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
-    public void getAllCPUComponents() {
+    public void printAllCPUComponents() {
         Result<Record> result = dsl.select().from("CPU").fetch();
         for (Record record : result) {
             Integer id = record.getValue(CPU.CPU_ID);
@@ -50,7 +54,7 @@ public class ComponentService {
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
-    public void getAllGPUComponents() {
+    public void printAllGPUComponents() {
         Result<Record> result = dsl.select().from("GPU").fetch();
         for (Record record : result) {
             Integer id = record.getValue(GPU.GPU_ID);
@@ -58,7 +62,7 @@ public class ComponentService {
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
-    public void getAllMainboardComponents() {
+    public void printAllMainboardComponents() {
         Result<Record> result = dsl.select().from("Mainboard").fetch();
         for (Record record : result) {
             Integer id = record.getValue(MAINBOARD.MB_ID);
@@ -66,7 +70,7 @@ public class ComponentService {
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
-    public void getAllPowerUnitComponents() {
+    public void printAllPowerUnitComponents() {
         Result<Record> result = dsl.select().from("PSU").fetch();
         for (Record record : result) {
             Integer id = record.getValue(PSU.PSU_ID);
@@ -74,7 +78,7 @@ public class ComponentService {
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
-    public void getAllCaseComponents() {
+    public void printAllCaseComponents() {
         Result<Record> result = dsl.select().from("ComputerCase").fetch();
         for (Record record : result) {
             Integer id = record.getValue(COMPUTERCASE.CASE_ID);
@@ -82,6 +86,10 @@ public class ComponentService {
             System.out.println("ID: " + id + " Name: " + name);
         }
     }
+
+    /* 
+     * Methoden um eine einzelne Komponente anhand ihrer ID zu returnen
+     */
 
     public CPU getOneCPU(int id) {
         Record record = dsl.select().from("CPU").where(CPU.CPU_ID.eq(id)).fetchOne();
