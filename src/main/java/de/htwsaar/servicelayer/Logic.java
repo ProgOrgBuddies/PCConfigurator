@@ -8,6 +8,11 @@ import de.htwsaar.persistenz.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/* Die Klasse die den eigentlichen Ablauf des Programmes kontrolliert. Wird ein Logic Objekt erstellt, werden die Services
+ * der Datenbanken initialisiert, sowie muss ein Objekt übergeben welches das servicelayer-UserInterface implementiert, übergeben wird.
+ * Dadurch wird sichergestellt, dass bei einem Austausch des UserInterfaces die Logic weiterhin ohne Veränderungen weiterlaufen kann.
+ */
+
 
 public class Logic {
 
@@ -25,6 +30,8 @@ public class Logic {
         this.personalListService = personalListConnection != null ? new PersonalListService(personalListConnection, componentService) : null;
     }
 
+    // Ruft die statischen Methoden aus DatabaseManager aus um eine Verbindung zur Components DB herzustellen und catcht mögliche SQLExceptions die vom DatabaseManager geworfen werden können
+
     public Connection connectToComponentDatabase() {
         try {
             Connection connection = DatabaseManager.connectComponentsDB();
@@ -35,6 +42,9 @@ public class Logic {
         }
         return null;
     }
+
+    // Ruft die statischen Methoden aus DatabaseManager aus um eine Verbindung zur PersonalList DB herzustellen und catcht mögliche SQLExceptions die vom DatabaseManager geworfen werden können
+
     public Connection connectToPersonalListDatabase() {
         try {
             Connection connection = DatabaseManager.connectPersonalListDB();
@@ -45,6 +55,8 @@ public class Logic {
         }
         return null;
     }
+
+    // Startet das Programm bzw. startet das MainMenu. Bevor werden noch die gespeicherten Listen initialisiert. 
 
     public void startProgram() {
         if (personalListService != null) {
@@ -57,6 +69,9 @@ public class Logic {
         showMainMenu();
 
     }
+
+    // Zeigt das MainMenu
+
     public void showMainMenu() {
         while (true) {
             int input = ui.showMainMenu();
@@ -67,11 +82,14 @@ public class Logic {
                     ui.showMessage("Programm wird beendet.");
                     return;
                 }
-                default -> ui.IllegalInput("Ungültige Eingabe");
+                default -> ui.illegalInput("Ungültige Eingabe");
             }
         }
 
     }
+
+    // Zeigt das DatabaseMenu
+
     public void showDatabaseMenu() {
         while (true) {
             int input = ui.showDatabaseMenu();
@@ -85,10 +103,13 @@ public class Logic {
                 case 7 -> {
                     return;
                 }
-                default -> ui.showMessage("Ungültige Auswahl! Bitte eine Zahl zwischen 0 und 5 eingeben.");
+                default -> ui.showMessage("Ungültige Auswahl! Bitte eine Zahl zwischen 0 und 7 eingeben.");
             }
         }
     }
+
+    // Zeigt das PersonalListMenu
+
     public void showPersonalListMenu() {
         while (true) {
             int choice = ui.showPersonalListMenu();
@@ -99,11 +120,13 @@ public class Logic {
                 case 4 -> {
                     return;
                 }
-                default -> ui.IllegalInput("Ungültige Auswahl.");
+                default -> ui.illegalInput("Ungültige Auswahl.");
             }
         }
 
     }
+
+    // Printet alle Persönlichen Listen 
 
     public void printPersonalLists() {
         if (!personalLists.isEmpty()) {
@@ -113,9 +136,11 @@ public class Logic {
         }
     }
 
+    // Erstellt eine persönliche Liste. Zuerst wird abgefragt ob die ID im passenden Bereich liegt oder ob bereits eine Liste mit dieser ID vorhanden ist.
+
     public void createPersonalList() {
         if (personalLists.size() > 3) {
-            ui.IllegalInput("Sie haben bereits 3 persönliche Listen erstellt. Bitte löschen Sie eine, um eine neue zu erstellen.");
+            ui.illegalInput("Sie haben bereits 3 persönliche Listen erstellt. Bitte löschen Sie eine, um eine neue zu erstellen.");
             return;
         }
 
@@ -145,6 +170,11 @@ public class Logic {
         personalLists.put(choiceID, newList);
     }
 
+   /* Generische Methode die eine Komponente auswählt und zurückgibt. choice gibt an, welche Komponente man ausgeben möchte. Es muss ein Class type
+    * übergeben werden damit die Komponente zu dem passenden Typen gecastet werden kann und zurückgegeben werden kann. Dies sorgt dafür
+    * dass nur eine Methode geschrieben werden muss statt 6 und garantiert leichtere Erweiterbarkeit in der Zukunft.
+   */ 
+
     private <T extends Components> T selectComponent(Class<T> type, int choice) {
         ui.showMessage("Bitte wähle eine " + getComponentName(choice) + " aus:");
 
@@ -156,7 +186,7 @@ public class Logic {
             case 4 -> componentService.printAllPowerUnitComponents();
             case 5 -> componentService.printAllCaseComponents();
             default -> {
-                ui.IllegalInput("Ungültige Wahl.");
+                ui.illegalInput("Ungültige Wahl.");
                 return null;
             }
         }
@@ -177,7 +207,7 @@ public class Logic {
     }
 
     /**
-     * Hilfsmethode, um den Namen der Komponente auszugeben.
+     * Hilfsmethode, um den Namen der Komponente auszugeben. Wird in selectComponent() aufgerufen.
      */
     private String getComponentName(int choice) {
         return switch (choice) {
@@ -191,6 +221,8 @@ public class Logic {
         };
     }
 
+    // Löscht persönliche Liste
+
     public void deletePersonalList() {
         printPersonalLists();
         int choice = ui.readMinMaxInput(1, 3);
@@ -199,10 +231,17 @@ public class Logic {
             personalListService.deletePersonalList(choice);
             ui.showMessage("Liste mit ID " + choice + " wurde gelöscht.");
         } else {
-            ui.IllegalInput("Keine Liste mit dieser ID gefunden.");
+            ui.illegalInput("Keine Liste mit dieser ID gefunden.");
         }
 
     }
+
+
+    /* Da wir wenn eine Liste null ist in der PersonalListDB trotzdem eine "leere" Liste erstellen, die aus null Objekten besteht, müssen wir beim Erstellen einer neuen Liste
+     * sicherstellen dass diese leere Liste gelöscht wird und ersetzt werden kann. Diese Methode checkt ob alle Komponenten null sind und returnt false wenn sie aus
+     * null Objekten besteht, true wenn sie eine "wirkliche" Liste ist. Methode wird in createPersonalList() aufgerufen.
+     */
+
     private boolean isValidPersonalList(PersonalList list) {
         if (list == null) return false;
         return list.getCpu() != null || list.getGpu() != null || list.getRam() != null ||

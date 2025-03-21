@@ -1,6 +1,5 @@
 package de.htwsaar.persistenz;
 
-// Klasse die die Datenbank PersonalList verwaltet (read+write)
 
 import de.htwsaar.servicelayer.PersonalList;
 import de.htwsaar.servicelayer.components.*;
@@ -17,6 +16,9 @@ import java.util.Map;
 
 import static org.jooq.impl.DSL.*;
 
+
+// Klasse die die Datenbank PersonalList verwaltet (read+write)
+
 public class PersonalListService {
     private final DSLContext dsl;
     private final ComponentService componentService;
@@ -24,15 +26,15 @@ public class PersonalListService {
     public PersonalListService(Connection connection, ComponentService componentService) {
         this.dsl = DSL.using(connection, SQLDialect.SQLITE);
         this.componentService = componentService;
-        System.out.println("Ich wurde aufgerufen");
 
         try {
-            // Logge die Verbindungs-URL
             System.out.println("Verbindung zur Datenbank: " + connection.getMetaData().getURL());
         } catch (SQLException e) {
             System.err.println("Fehler beim Abrufen der Verbindungs-URL: " + e.getMessage());
         }
     }
+
+    // Speichert eine Persönliche Liste in der Datenbank
 
     public void savePersonalList(PersonalList personalList) {
         dsl.insertInto(table("PersonalList"),
@@ -47,6 +49,8 @@ public class PersonalListService {
                         personalList.getComputerCase() != null ? personalList.getComputerCase().getId() : null)
                 .execute();
     }
+
+    // Lädt persönliche Liste aus der Datenbank. Sollten die IDs der entsprechenden nicht vorhanden sein bzw. NULL entsprechen werden Null Objekte erstellt.
 
     public Map<Integer, PersonalList> loadPersonalList() {
         Result<Record> records = dsl.select().from("PersonalList").fetch();
@@ -79,6 +83,9 @@ public class PersonalListService {
 
         return personalLists;
     }
+
+    // Löscht eine persönliche Liste anhand seiner ID
+
     public void deletePersonalList(int id) {
         dsl.deleteFrom(table("PersonalList"))
                 .where(field("PL_ID").eq(id))

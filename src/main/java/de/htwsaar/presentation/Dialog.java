@@ -13,11 +13,15 @@ public class Dialog extends UserInterface {
 
     }
 
+    // Startet das Programm
+
     public void start() {
         logic = new Logic(this);
         logic.startProgram();
 
     }
+
+    // Zeigt das MainMenu an und gibt einen passenden int zurück, der in der Logic benutzt wird um weiteren Ablauf zu regulieren
 
     public int showMainMenu() {
         System.out.println("==== MAIN MENU ====");
@@ -28,6 +32,9 @@ public class Dialog extends UserInterface {
         return readMinMaxInput(1, 3);
 
     }
+
+    // Zeigt das DatabaseMenu an und gibt einen passenden int zurück, der in der Logic benutzt wird um weiteren Ablauf zu regulieren
+
     public int showDatabaseMenu() {
         System.out.println("==== DATABASE MENU ====");
         System.out.println("Bitte geben Sie eine Kategorie an.");
@@ -41,6 +48,9 @@ public class Dialog extends UserInterface {
         return readMinMaxInput(1, 7);
 
     }
+
+    // Zeigt das PersonalListMenu an und gibt einen passenden int zurück, der in der Logic benutzt wird um weiteren Ablauf zu regulieren
+    
     public int showPersonalListMenu() {
         System.out.println("==== PERSONAL LIST MENU ====");
         System.out.println("Bitte geben Sie eine Kategorie an.");
@@ -52,24 +62,26 @@ public class Dialog extends UserInterface {
 
     }
 
-    //Hilfsmethode die einen Input zwischen 0 und einem max returnt
+    //Hilfsmethode die einen Input zwischen min und einem max returnt
+
     public int readMinMaxInput(int min, int max) {
-        int result = -1;
         while (true) {
             System.out.println("Eingabe:");
             if (!scanner.hasNextInt()) {
                 scanner.next();
-                IllegalInput("Bitte geben Sie eine Zahl an.");
+                illegalInput("Bitte geben Sie eine Zahl an.");
                 continue;
             }
             int choice = scanner.nextInt();
             if (choice >= min && choice <= max) {
                 return choice;
             } else {
-                IllegalInput("Ungültige Auswahl, bitte erneut eingeben!");
+                illegalInput("Ungültige Auswahl, bitte erneut eingeben!");
             }
         }
     }
+
+    // Frägt den Benutzer nach einer ID für eine Liste und gibt diese zurück
 
     public int createPersonalListMenu() {
         System.out.println("Wähle eine ID für deine Liste (ID muss zwischen 1 und 3 liegen):");
@@ -77,16 +89,16 @@ public class Dialog extends UserInterface {
 
     }
 
-    @Override
-    public void IllegalInput(String message) {
+    // Methode um Missinput von Benutzern auszudrücken 
+
+    public void illegalInput(String message) {
         System.out.println(message);
     }
+
+    // Methode um eine Nachricht auf dem CLI zu zeigen
 
     public void showMessage(String message) {
         System.out.println(message);
     }
-
-
-
 }
 

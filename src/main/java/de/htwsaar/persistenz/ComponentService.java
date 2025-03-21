@@ -25,7 +25,6 @@ public class ComponentService {
         }
 
         try {
-            // Logge die Verbindungs-URL
             System.out.println("Verbindung zur Datenbank: " + connection.getMetaData().getURL());
         } catch (SQLException e) {
             System.err.println("Fehler beim Abrufen der Verbindungs-URL: " + e.getMessage());
