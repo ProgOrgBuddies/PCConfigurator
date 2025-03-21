@@ -229,6 +229,9 @@ public class Logic {
         if (personalLists.containsKey(choice)) {
             personalLists.remove(choice);
             personalListService.deletePersonalList(choice);
+            PersonalList personalList = new PersonalList(choice, null, null, null, null, null, null);
+            personalListService.savePersonalList(personalList);
+            personalLists.put(choice, personalList);
             ui.showMessage("Liste mit ID " + choice + " wurde gelöscht.");
         } else {
             ui.illegalInput("Keine Liste mit dieser ID gefunden.");
