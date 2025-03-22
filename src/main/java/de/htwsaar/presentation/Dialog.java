@@ -50,7 +50,7 @@ public class Dialog extends UserInterface {
     }
 
     // Zeigt das PersonalListMenu an und gibt einen passenden int zurück, der in der Logic benutzt wird um weiteren Ablauf zu regulieren
-    
+
     public int showPersonalListMenu() {
         System.out.println("==== PERSONAL LIST MENU ====");
         System.out.println("Bitte geben Sie eine Kategorie an.");
@@ -99,6 +99,13 @@ public class Dialog extends UserInterface {
 
     public void showMessage(String message) {
         System.out.println(message);
+    }
+
+    public void showIllegalInput(String message) {
+        System.out.println(message);
+    }
+    public void showError(String message){
+
     }
 }
 
