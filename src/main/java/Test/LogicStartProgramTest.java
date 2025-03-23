@@ -80,6 +80,6 @@ public class LogicStartProgramTest {
         logic.startProgram();
 
 
-        assertTrue("startProgram should call showMainMenu", logic.wasShowMainMenuCalled());
+        assertTrue("startProgram sollte showMainMenu aufrufen", logic.wasShowMainMenuCalled());
     }
 }

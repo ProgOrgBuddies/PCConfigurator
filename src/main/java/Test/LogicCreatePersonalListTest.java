@@ -36,24 +36,19 @@ public class LogicCreatePersonalListTest {
 
         @Override
         public int readMinMaxInput(int min, int max) {
-            return 1; // Always return 1 for simplicity
+            return 1; 
         }
 
         @Override
         public int createPersonalListMenu() {
 
-            return 1; // Return a default value for testing
+            return 1;
         }
 
         public String getLastIllegalInput() {
             return lastIllegalInput;
         }
 
-        public String getLastMessage() {
-            return lastMessage;
-        }
-
-        @Override
         public int showMainMenu() {
             return 0;
         }
@@ -65,8 +60,7 @@ public class LogicCreatePersonalListTest {
 
         @Override
         public int showPersonalListMenu() {
-            // Implementierung für Testzwecke
-            return 0; // oder einen anderen sinnvollen Standardwert
+            return 0; 
         }
     }
 
@@ -106,7 +100,6 @@ public class LogicCreatePersonalListTest {
 
 
         assertEquals(
-                "Should show error for too many lists",
                 "Sie haben bereits 3 persönliche Listen erstellt. Bitte löschen Sie eine, um eine neue zu erstellen.",
                 testUI.getLastIllegalInput()
         );

@@ -61,13 +61,13 @@ public class LogicDatabaseConnectionTest {
     public void testConnectToComponentDatabase() {
         Connection connection = logic.connectToComponentDatabase();
 
-        assertNotNull("Component database connection should not be null", connection);
+        assertNotNull("Verbindung zur Komponenten Datenbank ist null" , connection);
     }
 
     @Test
     public void testConnectToPersonalListDatabase() {
         Connection connection = logic.connectToPersonalListDatabase();
 
-        assertNotNull("Personal list database connection should not be null", connection);
+        assertNotNull("Verbindung zur PersonalList Datenbank ist null", connection);
     }
 }
