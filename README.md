@@ -38,3 +38,14 @@
     </li>
   <li>Befolgen Sie gegebene Schritte um entweder Listen anzulegen oder Listen abzufragen.</li>
 </div>
+
+<h3><i>Anwendungsbeispiele</i></h3>
+<div>
+  <ul>
+    <li>Sie können unter anderem eine neue Liste anlegen, jeweils für die sechs Komponenten ein Item aussuchen und die vervollständigte Liste speichern.</li>
+    <li>Sie können eine bereits gespeicherte Liste abfragen, einsehen welche Komponenten enthalten sind und dieses gegebenfalls ändern.</li>
+  </ul>
+</div>
+
+<h3><i>Bekannte Einschränkungen</i></h3>
+<div>Bislang sind uns keine Einschränkungen bekannt.</div>
