@@ -21,8 +21,4 @@ public interface UserInterface {
     void showMessage(String message);
 
     int readMinMaxInput(int min, int max);
-
-
-
-
 }

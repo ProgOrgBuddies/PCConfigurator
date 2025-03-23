@@ -19,11 +19,11 @@ import static org.jooq.impl.DSL.*;
 
 // Klasse die die Datenbank PersonalList verwaltet (read+write)
 
-public class PersonalListService {
+public class PersonalListService implements PersonalListServiceInterface {
     private final DSLContext dsl;
-    private final ComponentService componentService;
+    private final ComponentServiceInterface componentService;
 
-    public PersonalListService(Connection connection, ComponentService componentService) {
+    public PersonalListService(Connection connection, ComponentServiceInterface componentService) {
         this.dsl = DSL.using(connection, SQLDialect.SQLITE);
         this.componentService = componentService;
 

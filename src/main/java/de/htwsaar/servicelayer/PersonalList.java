@@ -1,7 +1,5 @@
 package de.htwsaar.servicelayer;
 
-import java.io.Serializable;
-
 import de.htwsaar.servicelayer.components.*;
 
 // Klasse für die Erstellung von persönlichen Listen.

@@ -14,7 +14,7 @@ import static de.htwsaar.pcconfig.generated.components.Tables.*;
 
 // Klasse die PC-Komponenten aus der Datenbank PC_ComponentsDB verwaltet (read-only)
 
-public class ComponentService {
+public class ComponentService implements ComponentServiceInterface {
     private final DSLContext dsl;
 
     public ComponentService(Connection connection) {
@@ -151,7 +151,7 @@ public class ComponentService {
         Float price = record.getValue(PSU.PRICE);
         return new PowerUnit(idP, brand, name, price);
     }
-
+    
     public ComputerCase getOneComputerCase(int id) {
         Record record = dsl.select().from("ComputerCase").where(COMPUTERCASE.CASE_ID.eq(id)).fetchOne();
         if (record == null) {

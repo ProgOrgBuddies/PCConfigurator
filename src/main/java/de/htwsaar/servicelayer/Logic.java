@@ -18,8 +18,8 @@ public class Logic {
 
     // Map die persönliche Listen speichert. Dient als eine Art Cache.
     Map<Integer, PersonalList> personalLists = new HashMap<>();
-    private final ComponentService componentService;
-    private final PersonalListService personalListService;
+    private final ComponentServiceInterface componentService;
+    private final PersonalListServiceInterface personalListService;
     private UserInterface ui;
 
     public Logic (UserInterface ui) {
