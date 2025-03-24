@@ -55,7 +55,7 @@ public class DialogTest {
 
     @Test
     public void testReadMinMaxInput_ValidInput() throws Exception {
-        // Provide simulated user input
+        // Simulierte Benutzereingabe (z.B. der Benutzer gibt "2" ein)
         String input = "2\n";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
         System.setIn(inputStream);
@@ -71,7 +71,7 @@ public class DialogTest {
 
     @Test
     public void testShowMainMenu() throws Exception {
-
+        // Testet, ob das Hauptmenü korrekt angezeigt wird
         provideInput("1");
 
 

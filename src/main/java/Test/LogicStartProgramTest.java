@@ -12,7 +12,7 @@ public class LogicStartProgramTest {
     private TestUserInterface testUI;
     private TestableLogic logic;
 
-    // Custom UserInterface implementation for testing
+
     private class TestUserInterface implements UserInterface {
 
 
@@ -73,7 +73,7 @@ public class LogicStartProgramTest {
         testUI = new TestUserInterface();
         logic = new TestableLogic(testUI);
     }
-
+    //Testet, ob die Methode `startProgram` korrekt die Methode `showMainMenu` aufruft.
     @Test
     public void testStartProgram() {
 

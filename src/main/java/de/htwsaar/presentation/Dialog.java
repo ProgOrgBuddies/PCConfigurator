@@ -104,8 +104,6 @@ public class Dialog extends UserInterface {
     public void showIllegalInput(String message) {
         System.out.println(message);
     }
-    public void showError(String message){
 
-    }
 }
 

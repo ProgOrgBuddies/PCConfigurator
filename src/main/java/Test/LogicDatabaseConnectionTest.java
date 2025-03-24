@@ -56,14 +56,14 @@ public class LogicDatabaseConnectionTest {
 
         logic = new Logic(mockUI);
     }
-
+    //Testet, ob die Methode `connectToPersonalListDatabase` erfolgreich eine Verbindung zur PersonalList-Datenbank herstellt.
     @Test
     public void testConnectToComponentDatabase() {
         Connection connection = logic.connectToComponentDatabase();
 
         assertNotNull("Verbindung zur Komponenten Datenbank ist null" , connection);
     }
-
+    //Testet, ob die Methode `connectToPersonalListDatabase` erfolgreich eine Verbindung zur PersonalList-Datenbank herstellt.
     @Test
     public void testConnectToPersonalListDatabase() {
         Connection connection = logic.connectToPersonalListDatabase();

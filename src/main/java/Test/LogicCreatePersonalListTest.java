@@ -76,7 +76,7 @@ public class LogicCreatePersonalListTest {
         Field personalListsField = Logic.class.getDeclaredField("personalLists");
         personalListsField.setAccessible(true);
 
-
+// Erstellt eine Test-Datenstruktur mit vier persönlichen Listen (mehr als erlaubt)
         HashMap<Integer, PersonalList> testLists = new HashMap<>();
 
 
